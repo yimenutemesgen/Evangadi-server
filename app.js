@@ -100,14 +100,29 @@ app.use("/api/question", authMiddleware, questionRoutes);
 const answerRoutes = require("./routes/answerRoute");
 app.use("/api/answer", authMiddleware, answerRoutes);
 
+// async function start() {
+//   try {
+//     const result = await dbconnection.execute("select'test'");
+//     await app.listen(port);
+//     console.log(result);
+//     console.log(`Listening on port ${port}`);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
+
+// start();
+
+
 async function start() {
   try {
-    const result = await dbconnection.execute("select'test'");
-    await app.listen(port);
-    console.log(result);
-    console.log(`Listening on port ${port}`);
+    const result = await dbconnection.execute("select 'test'");
+    console.log("Database connection successful:", result);
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
   } catch (error) {
-    console.log(error.message);
+    console.error("Error starting server:", error.message);
   }
 }
 
